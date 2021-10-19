@@ -88,13 +88,44 @@ dynamite_df =
     stars = dynamite_stars)
 ```
 
+## try some APIs
 
+get some data from an API about water
 
+```{r}
+water_df = 
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.csv") %>% 
+  content()
+```
 
+let's see what JSON looks like
 
+```{r}
+water_df = 
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.json") %>% 
+  content("text") %>% 
+  jsonlite::fromJSON() %>% 
+  as_tibble() #dataframe to tibble
+```
 
+BRFSS data via API
 
+```{R}
+brfss_df = 
+  GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
+      query = list("$limit" = 5000)) %>% # code snippets - jQuery
+  content()
+```
 
+pokemon
 
+```{r}
+poke_data = 
+  GET("http://pokeapi.co/api/v2/pokemon/1") %>%
+  content()
 
+poke_data[["name"]]
+poke_data[["height"]]
+poke_data[["abilities"]]
+```
 
